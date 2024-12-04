@@ -19,4 +19,4 @@ Joey Velasco
 Raymart Jagdon
 
                       
-Docs Link:https://docs.google.com/document/d/1RN5zQPZofQensDngyrNcNKU10tmWbrFa/edit?usp=sharing&ouid=118058560961666920204&rtpof=true&sd=true
+Docs Link:https:  https://docs.google.com/document/d/1RN5zQPZofQensDngyrNcNKU10tmWbrFa/edit?usp=sharing&ouid=118058560961666920204&rtpof=true&sd=true
