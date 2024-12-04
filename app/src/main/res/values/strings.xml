@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">Techtonic</string>
+    <string name="title_activity_maps">Maps</string>
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+    <string-array name="hazard_types">
+        <item>Pothole</item>
+        <item>Debris</item>
+        <item>Wires</item>
+        <item>Other AIzaSyCp68FpAfyzAoJJGue46GY6yts4MDqbv3Q</item>
+        AIzaSyDFk3Gnl1g9YWJFZG95pcuf5WVdO1DV990
+    </string-array>
+    <string name="google_map_key">AIzaSyCp68FpAfyzAoJJGue46GY6yts4MDqbv3Q</string>
+    <string name="google_map_key_places">AIzaSyDFk3Gnl1g9YWJFZG95pcuf5WVdO1DV990</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="filter_options_pending">
+        <item>Pending</item>
+        <item>In Progress</item>
+        <item>Resolved</item>
+    </string-array>
+
+    <style name="SearchViewStyle" parent="Widget.AppCompat.SearchView">
+        <item name="queryBackground">@android:color/white</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+
+</resources>
