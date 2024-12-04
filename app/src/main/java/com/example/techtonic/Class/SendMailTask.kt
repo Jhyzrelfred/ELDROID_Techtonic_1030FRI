@@ -17,7 +17,7 @@ class SendMailTask(
 
     override fun doInBackground(vararg params: Void?): Void? {
         try {
-            // Set properties for Gmail SMTP
+
             val properties = Properties()
             properties["mail.smtp.host"] = "smtp.gmail.com"
             properties["mail.smtp.socketFactory.port"] = "465"
@@ -25,7 +25,6 @@ class SendMailTask(
             properties["mail.smtp.auth"] = "true"
             properties["mail.smtp.port"] = "465"
 
-            // Set up Gmail authentication
             val session = Session.getDefaultInstance(properties, object : javax.mail.Authenticator() {
                 override fun getPasswordAuthentication(): PasswordAuthentication {
                     // Use your Gmail address and app password (not the regular account password)
@@ -33,14 +32,12 @@ class SendMailTask(
                 }
             })
 
-            // Create email message
             val message = MimeMessage(session)
             message.setFrom(InternetAddress("your-email@gmail.com"))
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(recipientEmail))
             message.subject = subject
             message.setText(messageBody)
 
-            // Send email
             Transport.send(message)
         } catch (e: Exception) {
             e.printStackTrace()
