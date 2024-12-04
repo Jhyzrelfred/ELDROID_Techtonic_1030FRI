@@ -27,7 +27,6 @@ class SendMailTask(
 
             val session = Session.getDefaultInstance(properties, object : javax.mail.Authenticator() {
                 override fun getPasswordAuthentication(): PasswordAuthentication {
-                    // Use your Gmail address and app password (not the regular account password)
                     return PasswordAuthentication("your-email@gmail.com", "your-app-password")
                 }
             })
