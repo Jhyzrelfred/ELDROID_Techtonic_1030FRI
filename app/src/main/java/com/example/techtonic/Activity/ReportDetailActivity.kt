@@ -35,7 +35,7 @@ class ReportDetailActivity : AppCompatActivity() {
             .into(imageView)
     }
     override fun onBackPressed() {
-        setResult(Activity.RESULT_OK) // Return to the calling activity
+        setResult(Activity.RESULT_OK) 
         finish()
     }
 }
