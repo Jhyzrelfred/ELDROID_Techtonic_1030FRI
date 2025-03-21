@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Fragments.Settings"
+    android:id="@+id/fragment_settings"
     android:background="@color/background">
     <LinearLayout
         android:layout_width="match_parent"
@@ -12,12 +13,19 @@
         android:orientation="vertical"
         android:layout_margin="20dp"
         android:gravity="center">
+        <ImageButton
+            android:id="@+id/back_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_back"
+            android:layout_gravity="left"/>
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Settings"
             android:textSize="35sp"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="10dp"
             android:gravity="center"
             android:textColor="@color/black"/>
         <LinearLayout
@@ -26,7 +34,7 @@
             android:orientation="horizontal"
             android:padding="10dp"
             android:layout_marginTop="70dp"
-            android:background="@drawable/settings_rounded_corner">
+            android:background="@drawable/listview_border">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -39,6 +47,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="true"
+                android:backgroundTint="@color/Blue"
                 android:layout_marginStart="10dp"
                 tools:ignore="UseSwitchCompatOrMaterialXml"/>
         </LinearLayout>
@@ -48,13 +57,14 @@
             android:orientation="horizontal"
             android:padding="10dp"
             android:layout_marginTop="8dp"
-            android:background="@drawable/settings_rounded_corner">
+            android:background="@drawable/listview_border">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Privacy" android:textSize="21sp"
+                android:text="History Reports" android:textSize="21sp"
                 android:textColor="@color/black" android:layout_weight="1"/>
             <ImageView
+                android:id="@+id/historyreports"
                 android:layout_width="22dp"
                 android:layout_height="22dp"
                 android:src="@drawable/next"
@@ -66,7 +76,7 @@
             android:orientation="horizontal"
             android:padding="10dp"
             android:layout_marginTop="8dp"
-            android:background="@drawable/settings_rounded_corner"
+            android:background="@drawable/listview_border"
             tools:ignore="ExtraText">
             <TextView
                 android:layout_width="match_parent"
@@ -95,7 +105,7 @@
             android:orientation="horizontal"
             android:padding="10dp"
             android:layout_marginTop="8dp"
-            android:background="@drawable/settings_rounded_corner">
+            android:background="@drawable/listview_border">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -115,7 +125,7 @@
             android:orientation="horizontal"
             android:padding="10dp"
             android:layout_marginTop="8dp"
-            android:background="@drawable/settings_rounded_corner">
+            android:background="@drawable/listview_border">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -135,7 +145,7 @@
             android:orientation="horizontal"
             android:padding="10dp"
             android:layout_marginTop="8dp"
-            android:background="@drawable/settings_rounded_corner">
+            android:background="@drawable/listview_border">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -154,8 +164,9 @@
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:text="Logout"
-            android:backgroundTint="#9997FB"
+            app:backgroundTint="@color/Blue"
+            android:textColor="@android:color/white"
             android:background="@drawable/roundcorner"
-            android:layout_marginTop="70dp"/>
+            android:layout_marginTop="40dp"/>
     </LinearLayout>
 </FrameLayout>

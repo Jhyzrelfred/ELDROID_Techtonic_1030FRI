@@ -41,7 +41,7 @@ class HazardReport : AppCompatActivity() {
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private var currentLocation: Location? = null
     private var currentAddress: String? = null
-    private var imageUri: Uri? = null 
+    private var imageUri: Uri? = null // Store URI for image upload
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -212,4 +212,3 @@ class HazardReport : AppCompatActivity() {
         hazardPicture.setImageDrawable(null)
     }
 }
-

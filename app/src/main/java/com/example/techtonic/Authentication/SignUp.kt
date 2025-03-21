@@ -10,15 +10,22 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.techtonic.Class.SignupClass
 import com.example.techtonic.R
-import com.google.firebase.auth.FirebaseAuth
 import com.google.android.material.textfield.TextInputEditText
+import com.google.firebase.FirebaseException
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.PhoneAuthCredential
+import com.google.firebase.auth.PhoneAuthProvider
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import papaya.`in`.sendmail.SendMail
+import java.util.concurrent.TimeUnit
+import kotlin.random.Random
 
 class SignUp : AppCompatActivity() {
 
 
-    private lateinit var fullnameEditText: TextInputEditText
+    private lateinit var firstnameEditText: TextInputEditText
+    private lateinit var lastnameEditText: TextInputEditText
     private lateinit var emailEditText: TextInputEditText
     private lateinit var phoneEditText: TextInputEditText
     private lateinit var passwordEditText: TextInputEditText
@@ -27,13 +34,16 @@ class SignUp : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private lateinit var database: DatabaseReference
 
+    private var generatedOTP: Int = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
 
         auth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance().reference
-        fullnameEditText = findViewById(R.id.fullnameEditText)
+        firstnameEditText = findViewById(R.id.firstnameEditText)
+        lastnameEditText = findViewById(R.id.lastnameEditText)
         emailEditText = findViewById(R.id.emailEditText)
         phoneEditText = findViewById(R.id.phoneEditText)
         passwordEditText = findViewById(R.id.passEditText)
@@ -52,30 +62,35 @@ class SignUp : AppCompatActivity() {
     }
 
     private fun registerUser() {
-        val fullname = fullnameEditText.text.toString().trim()
+        val firstname = firstnameEditText.text.toString().trim()
+        val lastname = lastnameEditText.text.toString().trim()
         val email = emailEditText.text.toString().trim()
         val phone = phoneEditText.text.toString().trim()
         val password = passwordEditText.text.toString().trim()
         val confirmPassword = confirmPasswordEditText.text.toString().trim()
 
-        if (fullname.isEmpty()) {
-            fullnameEditText.error = "Fullname is required"
-            fullnameEditText.requestFocus()
+        if (firstname.isEmpty()) {
+            firstnameEditText.error = "First name is required"
+            firstnameEditText.requestFocus()
+            return
+        }
+        if (lastname.isEmpty()) {
+            firstnameEditText.error = "Last name is required"
+            firstnameEditText.requestFocus()
             return
         }
 
         if (email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            emailEditText.error = "Enter a valid email"
-            emailEditText.requestFocus()
+            lastnameEditText.error = "Enter a valid email"
+            lastnameEditText.requestFocus()
             return
         }
 
-        if (phone.isEmpty() || phone.length != 11) {
+        if (phone.isEmpty() || phone.length == 11) {
             phoneEditText.error = "Enter a valid phone number"
             phoneEditText.requestFocus()
             return
         }
-
         if (password.isEmpty() || password.length < 6) {
             passwordEditText.error = "Password must be at least 6 characters"
             passwordEditText.requestFocus()
@@ -88,9 +103,10 @@ class SignUp : AppCompatActivity() {
             return
         }
 
+
         auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener { task ->
             if (task.isSuccessful) {
-                saveUserData(email, fullname, phone)
+                saveUserData(firstname, lastname,email, phone)
                 auth.currentUser?.sendEmailVerification()?.addOnCompleteListener { verifyTask ->
                     if (verifyTask.isSuccessful) {
                         Toast.makeText(
@@ -118,9 +134,28 @@ class SignUp : AppCompatActivity() {
                 ).show()
             }
         }
+        sendVerificationEmail(email)
+
     }
 
-    private fun saveUserData(email: String, fullName: String, phoneNumber: String) {
+    private fun sendVerificationEmail(email: String) {
+        // Generate a random 6-digit OTP
+        generatedOTP = (100000..999999).random()
+
+        // Send email using SendMail
+        val mail = SendMail(
+            email,                     // Recipient's email
+            "Email Verification Code",
+            "Your verification code is: $generatedOTP"
+        )
+        mail.execute()
+
+        // Show a message and move to OTP verification screen
+        Toast.makeText(this, "Verification code sent to $email", Toast.LENGTH_LONG).show()
+
+    }
+
+    private fun saveUserData(firstName: String,lastName:String,email: String, phonenumber: String) {
         val userId = auth.currentUser?.uid
         Log.d("Firebase", "Saving data for user ID: $userId")
 
@@ -129,9 +164,9 @@ class SignUp : AppCompatActivity() {
             return
         }
 
-        val userRef = database.child("users").child(userId)
+        val userRef = database.child("Android_Users").child(userId)
 
-        val userData = SignupClass(email, fullName, phoneNumber)
+        val userData = SignupClass(firstName,lastName, email,phonenumber)
 
         Log.d("Firebase", "User data: $userData")
 
@@ -143,8 +178,5 @@ class SignUp : AppCompatActivity() {
                 Log.w("Firebase", "Error saving user data", e)
             }
     }
-
 }
-
-
 

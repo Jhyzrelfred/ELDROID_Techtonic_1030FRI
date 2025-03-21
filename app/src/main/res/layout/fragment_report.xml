@@ -1,9 +1,64 @@
-<?xml version="1.0" encoding="utf-8"?>
+<!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent"-->
+<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--    android:orientation="vertical"-->
+<!--    android:padding="16dp"-->
+<!--    android:background="#F8F9F7">-->
+
+<!--    <ImageButton-->
+<!--        android:id="@+id/back_button"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:background="#F8F9F7"-->
+<!--        android:src="@drawable/ic_back"-->
+<!--        android:contentDescription="Back" />-->
+
+
+<!--    <TextView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Report Status"-->
+<!--        android:textSize="40sp"-->
+<!--        android:textStyle="bold"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:layout_gravity="center"/>-->
+
+
+<!--    <SearchView-->
+<!--        android:id="@+id/search_bar"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginBottom="10dp"-->
+<!--        android:background="@color/white"-->
+<!--        android:focusable="true"-->
+<!--        android:iconifiedByDefault="false"-->
+<!--        android:focusableInTouchMode="true"-->
+<!--        android:queryHint="Search by Hazard Type"-->
+<!--        android:textColor="@color/black"-->
+<!--        app:theme="@style/SearchViewStyle"/>-->
+
+
+
+
+
+<!--    <ListView-->
+<!--        android:id="@+id/recycler_view_reports"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="0dp"-->
+<!--        android:layout_weight="1"-->
+<!--        android:layout_marginTop="8dp"/>-->
+<!--</LinearLayout>-->
+
+
+
+<!--<?xml version="1.0" encoding="utf-8"?>-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:padding="16dp"
     android:background="#F8F9F7">
 
@@ -15,7 +70,6 @@
         android:src="@drawable/ic_back"
         android:contentDescription="Back" />
 
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -23,33 +77,322 @@
         android:textSize="40sp"
         android:textStyle="bold"
         android:textColor="@color/black"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Filter buttons for status -->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginBottom="8dp">
+
+        <Button
+            android:id="@+id/pending_button"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Pending"
+            app:backgroundTint="@color/button_filter_selector"
+            android:textColor="@color/button_text_color" />
+
+        <Button
+            android:id="@+id/in_progress_button"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="On Progress"
+            app:backgroundTint="@color/button_filter_selector"
+            android:textColor="@color/button_text_color" />
+    </LinearLayout>
+
+    <!-- Filter buttons for hazard type -->
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true"
+        android:scrollbars="none"
+        android:layout_marginBottom="8dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+<!--            <Button-->
+<!--                android:id="@+id/pothole_button"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_weight="1"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Pothole"-->
+<!--                android:background="@drawable/button_filter_selector"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:paddingHorizontal="16dp"-->
+<!--                android:layout_marginEnd="8dp"/>-->
+<!--            <com.google.android.material.button.MaterialButtonToggleGroup-->
+<!--                android:id="@+id/hazard_toggle_group"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginBottom="8dp"-->
+<!--                app:singleSelection="true">-->
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/pothole_button"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="Pothole"
+                app:cornerRadius="8dp"
+                android:layout_marginHorizontal="2dp"
+                app:backgroundTint="@color/button_filter_selector"
+                android:textColor="@color/button_text_color"
+                app:checkedIcon="@null"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/alligatorcracks_button"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="Alligator Cracks"
+                app:cornerRadius="8dp"
+                android:layout_marginHorizontal="2dp"
+                app:backgroundTint="@color/button_filter_selector"
+                android:textColor="@color/button_text_color"
+                app:checkedIcon="@null"/>
 
 
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/majorscalling_button"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="Major Scalling"
+                app:cornerRadius="8dp"
+                android:layout_marginHorizontal="2dp"
+                app:backgroundTint="@color/button_filter_selector"
+                android:textColor="@color/button_text_color"
+                app:checkedIcon="@null"/>
+<!--            <com.google.android.material.button.MaterialButtonToggleGroup-->
+<!--                android:id="@+id/hazard_toggle_group"-->
+<!--                android:orientation="horizontal"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginHorizontal="1dp"-->
+<!--                app:cornerRadius="25dp"-->
+<!--                app:singleSelection="true"-->
+<!--                android:layout_marginBottom="11dp">-->
+
+<!--                <com.google.android.material.button.MaterialButton-->
+<!--                    android:id="@+id/pothole_button"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Pothole"-->
+<!--                    app:backgroundTint="@color/button_filter_selector"-->
+<!--                    app:cornerRadius="8dp"-->
+<!--                    android:textColor="@color/button_text_color"-->
+<!--                    app:checkedIcon="@null"-->
+<!--                    app:strokeWidth="2dp"-->
+<!--                    app:strokeColor="@color/black"-->
+<!--                    android:layout_margin="5dp" />-->
+
+<!--                <com.google.android.material.button.MaterialButton-->
+<!--                    android:id="@+id/alligatorcracks_button"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Alligator Cracks"-->
+<!--                    app:backgroundTint="@color/button_filter_selector"-->
+<!--                    app:cornerRadius="8dp"-->
+<!--                    android:textColor="@color/button_text_color"-->
+<!--                    app:checkedIcon="@null"-->
+<!--                    app:strokeWidth="2dp"-->
+<!--                    app:strokeColor="@color/black"-->
+<!--                    android:layout_margin="5dp" />-->
+
+<!--                <com.google.android.material.button.MaterialButton-->
+<!--                    android:id="@+id/majorscalling_button"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Major Scalling"-->
+<!--                    app:backgroundTint="@color/button_filter_selector"-->
+<!--                    app:cornerRadius="8dp"-->
+<!--                    android:textColor="@color/button_text_color"-->
+<!--                    app:checkedIcon="@null"-->
+<!--                    app:strokeWidth="2dp"-->
+<!--                    app:strokeColor="@color/black"-->
+<!--                    android:layout_margin="5dp" />-->
+
+<!--                <com.google.android.material.button.MaterialButton-->
+<!--                    android:id="@+id/shovingandcorrugation_button"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Shoving and Corrugation"-->
+<!--                    app:backgroundTint="@color/button_filter_selector"-->
+<!--                    app:cornerRadius="8dp"-->
+<!--                    android:textColor="@color/button_text_color"-->
+<!--                    app:checkedIcon="@null"-->
+<!--                    app:strokeWidth="2dp"-->
+<!--                    app:strokeColor="@color/black"-->
+<!--                    android:layout_margin="5dp" />-->
+
+<!--                <com.google.android.material.button.MaterialButton-->
+<!--                    android:id="@+id/pumpinganddepression_button"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Pumping and Depression"-->
+<!--                    app:backgroundTint="@color/button_filter_selector"-->
+<!--                    app:cornerRadius="8dp"-->
+<!--                    android:textColor="@color/button_text_color"-->
+<!--                    app:checkedIcon="@null"-->
+<!--                    app:strokeWidth="2dp"-->
+<!--                    app:strokeColor="@color/black"-->
+<!--                    android:layout_margin="5dp" />-->
+
+<!--                <com.google.android.material.button.MaterialButton-->
+<!--                    android:id="@+id/fademarkings_button"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Fade Road Markings"-->
+<!--                    app:backgroundTint="@color/button_filter_selector"-->
+<!--                    app:cornerRadius="8dp"-->
+<!--                    android:textColor="@color/button_text_color"-->
+<!--                    app:checkedIcon="@null"-->
+<!--                    app:strokeWidth="2dp"-->
+<!--                    app:strokeColor="@color/black"-->
+<!--                    android:layout_margin="5dp" />-->
+
+<!--                <com.google.android.material.button.MaterialButton-->
+<!--                    android:id="@+id/defectsonshoulder_button"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Defects on Shoulder"-->
+<!--                    app:backgroundTint="@color/button_filter_selector"-->
+<!--                    app:cornerRadius="8dp"-->
+<!--                    android:textColor="@color/button_text_color"-->
+<!--                    app:checkedIcon="@null"-->
+<!--                    app:strokeWidth="2dp"-->
+<!--                    app:strokeColor="@color/black"-->
+<!--                    android:layout_margin="5dp" />-->
+
+<!--                <com.google.android.material.button.MaterialButton-->
+<!--                    android:id="@+id/lushvegetation_button"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Lush Vegetation"-->
+<!--                    app:backgroundTint="@color/button_filter_selector"-->
+<!--                    app:cornerRadius="8dp"-->
+<!--                    android:textColor="@color/button_text_color"-->
+<!--                    app:checkedIcon="@null"-->
+<!--                    app:strokeWidth="2dp"-->
+<!--                    app:strokeColor="@color/black"-->
+<!--                    android:layout_margin="5dp" />-->
+
+<!--                <com.google.android.material.button.MaterialButton-->
+<!--                    android:id="@+id/cloggeddrains_button"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Clogged Drains"-->
+<!--                    app:backgroundTint="@color/button_filter_selector"-->
+<!--                    app:cornerRadius="8dp"-->
+<!--                    android:textColor="@color/button_text_color"-->
+<!--                    app:checkedIcon="@null"-->
+<!--                    app:strokeWidth="2dp"-->
+<!--                    app:strokeColor="@color/black"-->
+<!--                    android:layout_margin="5dp" />-->
+
+<!--                <com.google.android.material.button.MaterialButton-->
+<!--                    android:id="@+id/openmanhole_button"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Open Manhole"-->
+<!--                    app:backgroundTint="@color/button_filter_selector"-->
+<!--                    app:cornerRadius="8dp"-->
+<!--                    android:textColor="@color/button_text_color"-->
+<!--                    app:checkedIcon="@null"-->
+<!--                    app:strokeWidth="2dp"-->
+<!--                    app:strokeColor="@color/black"-->
+<!--                    android:layout_margin="5dp" />-->
+
+<!--                <com.google.android.material.button.MaterialButton-->
+<!--                    android:id="@+id/inadequatesealant_button"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Inadequate Sealant in Joints"-->
+<!--                    app:backgroundTint="@color/button_filter_selector"-->
+<!--                    app:cornerRadius="8dp"-->
+<!--                    android:textColor="@color/button_text_color"-->
+<!--                    app:checkedIcon="@null"-->
+<!--                    app:strokeWidth="2dp"-->
+<!--                    app:strokeColor="@color/black"-->
+<!--                    android:layout_margin="5dp" />-->
+
+<!--                <com.google.android.material.button.MaterialButton-->
+<!--                    android:id="@+id/cracks_button"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Cracks"-->
+<!--                    app:backgroundTint="@color/button_filter_selector"-->
+<!--                    app:cornerRadius="8dp"-->
+<!--                    android:textColor="@color/button_text_color"-->
+<!--                    app:checkedIcon="@null"-->
+<!--                    app:strokeWidth="2dp"-->
+<!--                    app:strokeColor="@color/black"-->
+<!--                    android:layout_margin="5dp" />-->
+
+<!--                <com.google.android.material.button.MaterialButton-->
+<!--                    android:id="@+id/raveling_button"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Raveling"-->
+<!--                    app:backgroundTint="@color/button_filter_selector"-->
+<!--                    app:cornerRadius="8dp"-->
+<!--                    android:textColor="@color/button_text_color"-->
+<!--                    app:checkedIcon="@null"-->
+<!--                    app:strokeWidth="2dp"-->
+<!--                    app:strokeColor="@color/black"-->
+<!--                    android:layout_margin="5dp" />-->
+
+
+<!--            </com.google.android.material.button.MaterialButtonToggleGroup>-->
+        </LinearLayout>
+
+    </HorizontalScrollView>
+
+    <!-- Search bar -->
     <SearchView
         android:id="@+id/search_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
         android:background="@color/white"
-        android:focusable="true"
         android:iconifiedByDefault="false"
-        android:focusableInTouchMode="true"
         android:queryHint="Search by Hazard Type"
         android:textColor="@color/black"
-        app:theme="@style/SearchViewStyle"/>
+        app:theme="@style/SearchViewStyle" />
 
-
-
-
-
+    <!-- ListView for reports -->
     <ListView
         android:id="@+id/recycler_view_reports"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:layout_marginTop="8dp"/>
+        android:layout_marginTop="8dp" />
+
 </LinearLayout>
-
-
-

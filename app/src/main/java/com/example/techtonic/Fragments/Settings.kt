@@ -7,13 +7,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageButton
+import android.widget.ImageView
 import androidx.appcompat.app.AlertDialog
+import com.example.techtonic.Activity.History
 import com.example.techtonic.Authentication.SignIn
 import com.example.techtonic.R
 
 
 class Settings : Fragment() {
+    private lateinit var history: ImageView
     private lateinit var Logout: Button
+    private lateinit var backButton: ImageButton
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -21,9 +26,22 @@ class Settings : Fragment() {
         val view = inflater.inflate(R.layout.fragment_settings, container, false)
 
         Logout = view.findViewById(R.id.logout)
+        history = view.findViewById(R.id.historyreports)
         Logout.setOnClickListener {
             showLogoutConfirmation()
         }
+        history.setOnClickListener {
+            val intent = Intent(requireContext(), History::class.java)
+            startActivity(intent)
+        }
+        backButton = view.findViewById(R.id.back_button)
+        backButton.setOnClickListener {
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_cont, Home()) // Ensure this is your correct container ID
+                .addToBackStack(null)
+                .commit()
+        }
+
 
         return view
     }

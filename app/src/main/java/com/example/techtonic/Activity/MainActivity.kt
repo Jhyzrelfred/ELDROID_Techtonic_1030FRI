@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
 
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                .replace(R.id.container, Home())
+                .replace(R.id.fragment_cont, Home())
                 .commit()
         }
 
@@ -62,7 +62,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun loadFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
-            .replace(R.id.container, fragment)
+            .replace(R.id.fragment_cont, fragment)
             .commit()
     }
     fun updateNotificationBadge(count: Int) {

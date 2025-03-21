@@ -23,8 +23,8 @@ import com.example.techtonic.models.Users
 
 class Profile : Fragment() {
 
-    private lateinit var fullnametv: TextView
-    private lateinit var Gender: TextView
+    private lateinit var firstnametv: TextView
+    private lateinit var lastnametv: TextView
     private lateinit var Edit: Button
     private lateinit var emailTextView: TextView
     private lateinit var phoneNumberTextView: TextView
@@ -39,8 +39,8 @@ class Profile : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_profile, container, false)
 
-        fullnametv = view.findViewById(R.id.txtfullname)
-        Gender = view.findViewById(R.id.tvgender)
+        firstnametv = view.findViewById(R.id.txtfirstname)
+        lastnametv = view.findViewById(R.id.txtlastname)
         emailTextView = view.findViewById(R.id.txtEmailAddress)
         phoneNumberTextView = view.findViewById(R.id.txtPhoneNumber)
         Edit = view.findViewById(R.id.btn_edit)
@@ -61,7 +61,7 @@ class Profile : Fragment() {
             1
         )
 
-        database = FirebaseDatabase.getInstance().getReference("UserProfile")
+        database = FirebaseDatabase.getInstance().getReference("Android_Users")
 
 
         fetchUserProfilefromDatabase()
@@ -101,22 +101,22 @@ class Profile : Fragment() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 users.clear()
                 for (data in snapshot.children) {
+                    val firsName = data.child("firstName").getValue(String::class.java) ?: ""
+                    val lastName = data.child("lastName").getValue(String::class.java) ?: ""
                     val email = data.child("email").getValue(String::class.java) ?: ""
-                    val fullname = data.child("fullname").getValue(String::class.java) ?: ""
                     val phoneNumber = data.child("phoneNumber").getValue(String::class.java) ?: ""
                     val imageUrl = data.child("imageUrl").getValue(String::class.java) ?: ""
-                    val gender = data.child("gender").getValue(String::class.java) ?: ""
 
-                    val userItem = Users(email, fullname, phoneNumber, imageUrl,gender)
+                    val userItem = Users(email, firsName, lastName, phoneNumber, imageUrl)
                     users.add(userItem)
                 }
 
                 if (users.isNotEmpty()) {
                     val firstUser = users[0]
-                    fullnametv.text = firstUser.fullName
+                    firstnametv.text = firstUser.firstName
+                    lastnametv.text = firstUser.lastName
                     emailTextView.text = firstUser.email
                     phoneNumberTextView.text = firstUser.phoneNumber
-                    Gender.text = firstUser.gender
                 }
             }
 

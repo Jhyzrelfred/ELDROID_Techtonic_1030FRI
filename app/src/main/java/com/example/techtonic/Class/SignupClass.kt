@@ -1,7 +1,3 @@
 package com.example.techtonic.Class
 
-data class SignupClass(
-    val email: String,
-    val fullName: String,
-    val phoneNumber: String,
-    )
+data class SignupClass(val firstName: String, val lastName: String,val email: String,val phoneNumber: String)
